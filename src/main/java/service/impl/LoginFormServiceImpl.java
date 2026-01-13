@@ -1,5 +1,6 @@
 package service.impl;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import model.dto.LoginDTO;
 import repository.LoginFormRepository;
 import repository.impl.LoginFormRepositoryImpl;
@@ -12,7 +13,8 @@ public class LoginFormServiceImpl implements LoginFormService {
     public boolean login(LoginDTO loginDTO) {
         String storedHash = loginFormRepository.getPasswordHashByEmail(loginDTO.getEmail());
         if (storedHash != null) {
-            /*return BCrypt.checkpw(loginDTO.getPassword(), storedHash);*/
+            BCrypt.Result result = BCrypt.verifyer().verify(loginDTO.getPassword().toCharArray(), storedHash);
+            return result.verified;
         }
         return false;
 
