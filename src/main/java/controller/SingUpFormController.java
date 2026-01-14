@@ -14,10 +14,13 @@ import service.SingUpService;
 import service.impl.SingUpFormServiceImpl;
 
 import java.io.IOException;
+import java.net.URL;
 
 public class SingUpFormController {
 
     private final SingUpService singUpService = new SingUpFormServiceImpl();
+
+
 
     @FXML
     private Button btnSingUp;
@@ -37,31 +40,40 @@ public class SingUpFormController {
     @FXML
     private PasswordField txtRePassword;
 
+    // 🔵 SIGN UP BUTTON
     @FXML
-    void btnSingUpOnAction(ActionEvent event){
+    void btnSingUpOnAction(ActionEvent event) {
 
         String firstName = txtFirstName.getText().trim();
         String lastName  = txtLastName.getText().trim();
         String email     = txtEmail.getText().trim();
         String password  = txtPassword.getText();
-        String rePassword    = txtRePassword.getText();
+        String rePassword = txtRePassword.getText();
 
+        // 1️⃣ Empty check
+        if (firstName.isEmpty() || lastName.isEmpty()
+                || email.isEmpty() || password.isEmpty() || rePassword.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Error", "All fields are required");
+            return;
+        }
 
+        // 2️⃣ Email validation
         if (!email.matches("^[a-zA-Z0-9._%+-]+@gmail\\.com$")) {
-            showAlert("Error", "Email must be a valid @gmail.com address");
+            showAlert(Alert.AlertType.ERROR, "Error",
+                    "Email must be a valid @gmail.com address");
             return;
         }
 
-
+        // 3️⃣ Password match
         if (!password.equals(rePassword)) {
-            showAlert("Error", "Passwords do not match");
+            showAlert(Alert.AlertType.ERROR, "Error", "Passwords do not match");
             return;
         }
 
-
+        // 4️⃣ Password strength
         if (!password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*]).{8,}$")) {
-            showAlert("Error",
-                    "Password must have:\n" +
+            showAlert(Alert.AlertType.ERROR, "Error",
+                    "Password must contain:\n" +
                             "- At least 8 characters\n" +
                             "- Uppercase letter\n" +
                             "- Lowercase letter\n" +
@@ -69,13 +81,13 @@ public class SingUpFormController {
             return;
         }
 
-
+        // 5️⃣ Email exists
         if (singUpService.isEmailExist(email)) {
-            showAlert("Error", "Email already registered");
+            showAlert(Alert.AlertType.ERROR, "Error", "Email already registered");
             return;
         }
 
-
+        // 6️⃣ DTO (CORRECT)
         SingUpDTO dto = new SingUpDTO(
                 firstName,
                 lastName,
@@ -84,10 +96,10 @@ public class SingUpFormController {
                 rePassword
         );
 
-
+        // 7️⃣ Register
         if (singUpService.register(dto)) {
-            showAlert("Success", "Registration successful!");
-
+            showAlert(Alert.AlertType.INFORMATION,
+                    "Success", "Registration successful!");
 
             try {
                 Stage stage = (Stage) btnSingUp.getScene().getWindow();
@@ -100,16 +112,20 @@ public class SingUpFormController {
             }
 
         } else {
-            showAlert("Error", "Registration failed");
+            showAlert(Alert.AlertType.ERROR,
+                    "Error", "Registration failed");
         }
     }
 
+    // 🔙 BACK TO LOGIN BUTTON (FIXED)
 
-    private void showAlert(String title, String msg) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    private void showAlert(Alert.AlertType type, String title, String msg) {
+        Alert alert = new Alert(type);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(msg);
         alert.showAndWait();
     }
+
+
 }

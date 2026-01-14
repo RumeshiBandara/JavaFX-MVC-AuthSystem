@@ -4,31 +4,37 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<AnchorPane prefHeight="520.0" prefWidth="400.0" style="-fx-background-color: linear-gradient(to bottom right, #fb6f92, #e4c1f9);" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SingUpFormController">
 
-<AnchorPane prefHeight="633.0" prefWidth="499.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SingUpFormController">
-   <children>
-      <Pane prefHeight="634.0" prefWidth="499.0">
-         <children>
-            <Label layoutX="188.0" layoutY="14.0" prefHeight="28.0" prefWidth="124.0" text="Sing Up">
-               <font>
-                  <Font name="System Bold" size="31.0" />
-               </font>
-            </Label>
-            <TextField fx:id="txtFirstName" layoutX="50.0" layoutY="114.0" prefHeight="30.0" prefWidth="408.0" promptText="First Name" />
-            <TextField fx:id="txtLastName" layoutX="50.0" layoutY="179.0" prefHeight="30.0" prefWidth="408.0" promptText="Last Name" />
-            <TextField fx:id="txtEmail" layoutX="50.0" layoutY="258.0" prefHeight="30.0" prefWidth="408.0" promptText="E mail" />
-            <PasswordField fx:id="txtPassword" layoutX="53.0" layoutY="330.0" prefHeight="30.0" prefWidth="408.0" promptText="password" />
-            <PasswordField fx:id="txtRePassword" layoutX="56.0" layoutY="408.0" prefHeight="30.0" prefWidth="408.0" promptText="confirm to the password" />
-            <Button fx:id="btnSingUp" layoutX="369.0" layoutY="466.0" mnemonicParsing="false" onAction="#btnSingUpOnAction" prefHeight="25.0" prefWidth="88.0" text="sing up">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Button>
-         </children>
-      </Pane>
-   </children>
+    <VBox layoutX="50" layoutY="30" prefWidth="300" spacing="14" style="-fx-background-color: white;                  -fx-background-radius: 25;                  -fx-padding: 30;">
+
+        <effect>
+            <DropShadow offsetY="4" radius="15" />
+        </effect>
+
+        <!-- Title -->
+        <Label alignment="CENTER" style="-fx-text-fill: #fb6f92;" text="Create Account 💕">
+            <font>
+                <Font name="System Bold" size="24" />
+            </font>
+        </Label>
+
+        <TextField fx:id="txtFirstName" prefHeight="38" promptText="First Name" />
+        <TextField fx:id="txtLastName" prefHeight="38" promptText="Last Name" />
+        <TextField fx:id="txtEmail" prefHeight="38" promptText="Email" />
+        <PasswordField fx:id="txtPassword" prefHeight="38" promptText="Password" />
+        <PasswordField fx:id="txtRePassword" prefHeight="38" promptText="Confirm Password" />
+
+        <!-- Sign Up -->
+        <Button fx:id="btnSingUp" onAction="#btnSingUpOnAction" prefHeight="40" style="-fx-background-color: #fb6f92;                        -fx-text-fill: white;                        -fx-font-size: 15;                        -fx-background-radius: 15;" text="Sign Up" />
+        <!-- Login Link -->
+
+
+    </VBox>
 </AnchorPane>

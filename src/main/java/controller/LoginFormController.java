@@ -23,14 +23,13 @@ public class LoginFormController {
     private Button btnLogin;
 
     @FXML
-    private Button btnSingUp;
+    private Button btnSignUp;
 
     @FXML
     private TextField txtEmail;
 
     @FXML
     private PasswordField txtPassword;
-
 
     @FXML
     void btnLogin(ActionEvent event) {
@@ -67,9 +66,9 @@ public class LoginFormController {
 
     // 🔁 GO TO SIGN UP
     @FXML
-    void btnSingUP(ActionEvent event) {
+    void btnSingUpOnAction(ActionEvent event) {
         try {
-            Stage stage = (Stage) btnSingUp.getScene().getWindow();
+            Stage stage = (Stage) btnSignUp.getScene().getWindow();
             stage.setScene(new Scene(
                     FXMLLoader.load(getClass().getResource("/view/singUp_Form.fxml"))
             ));
@@ -80,7 +79,7 @@ public class LoginFormController {
         }
     }
 
-    // 🔔 COMMON ALERT METHOD
+
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -88,4 +87,6 @@ public class LoginFormController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+
 }

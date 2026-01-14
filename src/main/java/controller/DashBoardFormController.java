@@ -19,8 +19,6 @@ public class DashBoardFormController {
     void btnLogOutOnAction(ActionEvent event) {
         try {
             Stage stage = (Stage) btnLogOut.getScene().getWindow();
-
-
             Parent root = FXMLLoader.load(getClass().getResource("/view/login_Form.fxml"));
             stage.setScene(new Scene(root));
             stage.setTitle("Login");
