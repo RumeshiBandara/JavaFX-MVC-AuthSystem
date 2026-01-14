@@ -18,7 +18,7 @@ import java.net.URL;
 
 public class SingUpFormController {
 
-    SingUpService singUpService = new SingUpFormServiceImpl();
+    private final SingUpService singUpService = new SingUpFormServiceImpl();
 
     @FXML
     private Button btnSingUp;
@@ -51,46 +51,34 @@ public class SingUpFormController {
         String password  = txtPassword.getText();
         String rePassword = txtRePassword.getText();
 
-
-        if (firstName.isEmpty() || lastName.isEmpty()
-                || email.isEmpty() || password.isEmpty() || rePassword.isEmpty()) {
+        if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty()
+                || password.isEmpty() || rePassword.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Error", "All fields are required");
             return;
         }
 
-
         if (!email.matches("^[a-zA-Z0-9._%+-]+@gmail\\.com$")) {
-            showAlert(Alert.AlertType.ERROR, "Error",
-                    "Email must be a valid @gmail.com address");
+            showAlert(Alert.AlertType.ERROR, "Error", "Email must be a valid @gmail.com address");
             return;
         }
-
 
         if (!password.equals(rePassword)) {
             showAlert(Alert.AlertType.ERROR, "Error", "Passwords do not match");
             return;
         }
 
-
         if (!password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*]).{8,}$")) {
             showAlert(Alert.AlertType.ERROR, "Error",
-                    "Password must contain:\n" +
-                            "- At least 8 characters\n" +
-                            "- Uppercase letter\n" +
-                            "- Lowercase letter\n" +
-                            "- Special character");
+                    "Password must contain:\n- At least 8 characters\n- Uppercase letter\n- Lowercase letter\n- Special character");
             return;
         }
-
 
         if (singUpService.isEmailExist(email)) {
             showAlert(Alert.AlertType.ERROR, "Error", "Email already registered");
             return;
         }
 
-
         SingUpDTO dto = new SingUpDTO(firstName, lastName, email, password, rePassword);
-
 
         if (singUpService.register(dto)) {
             showAlert(Alert.AlertType.INFORMATION, "Success", "Registration successful!");
@@ -116,16 +104,37 @@ public class SingUpFormController {
         }
     }
 
+    // 🔙 BACK TO LOGIN BUTTON
+    @FXML
+    void btnBackToLoginOnAction(ActionEvent event) {
+        try {
+            URL url = getClass().getResource("/view/LoginForm.fxml");
+            if (url == null) {
+                showAlert(Alert.AlertType.ERROR, "Error", "Login FXML not found");
+                return;
+            }
+
+            Stage stage = (Stage) btnBackToLogin.getScene().getWindow();
+            stage.setScene(new Scene(FXMLLoader.load(url)));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error", "Login page load failed");
+        }
+    }
+
+    // 🎨 THEMED ALERT METHOD
     private void showAlert(Alert.AlertType type, String title, String message) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
 
-
-        alert.getDialogPane().getStylesheets().add(
-                getClass().getResource("/css/alert.css").toExternalForm()
-        );
+        URL cssURL = getClass().getResource("/css/alert.css");
+        if (cssURL != null) {
+            alert.getDialogPane().getStylesheets().add(cssURL.toExternalForm());
+        }
 
         alert.showAndWait();
     }
