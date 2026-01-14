@@ -1,0 +1,52 @@
+/* alert.css */
+
+/* Error alerts (soft red gradient with shadow) */
+.dialog-pane:error {
+    -fx-background-color: linear-gradient(to bottom right, #ffc2c2, #ff8a8a);
+    -fx-border-color: #ff4d4d;
+    -fx-border-width: 2;
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 4);
+}
+
+/* Information alerts (soft green gradient with shadow) */
+.dialog-pane:information {
+    -fx-background-color: linear-gradient(to bottom right, #d4f7d4, #a6e3a6);
+    -fx-border-color: #33cc33;
+    -fx-border-width: 2;
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 4);
+}
+
+/* Warning alerts (soft yellow gradient with shadow) */
+.dialog-pane:warning {
+    -fx-background-color: linear-gradient(to bottom right, #fff5cc, #ffea99);
+    -fx-border-color: #ffcc33;
+    -fx-border-width: 2;
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 4);
+}
+
+/* Dialog buttons (rounded, gradient, hover effect) */
+.button {
+    -fx-background-color: linear-gradient(to bottom right, #fb6f92, #e85d9b);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 15;
+    -fx-padding: 8 20 8 20;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 5, 0, 0, 3);
+    -fx-font-size: 14px;
+}
+
+/* Hover effect for buttons */
+.button:hover {
+    -fx-background-color: linear-gradient(to bottom right, #e85d9b, #fb6f92);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 7, 0, 0, 4);
+}
+
+/* Pressed button effect */
+.button:pressed {
+    -fx-background-color: linear-gradient(to bottom right, #d1457a, #e85d9b);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 2, 0, 0, 2);
+}
