@@ -14,7 +14,7 @@ public class SingUpFormServiceImpl implements SingUpService {
     @Override
     public boolean register(SingUpDTO user) {
         try {
-            // 🔐 Hash password before saving
+
             String hashedPassword = hashPassword(user.getPassword());
             user.setPassword(hashedPassword);
 

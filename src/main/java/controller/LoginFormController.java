@@ -14,10 +14,11 @@ import service.LoginFormService;
 import service.impl.LoginFormServiceImpl;
 
 import java.io.IOException;
+import java.net.URL;
 
 public class LoginFormController {
 
-    private final LoginFormService loginFormService = new LoginFormServiceImpl();
+     LoginFormService loginFormService = new LoginFormServiceImpl();
 
     @FXML
     private Button btnLogin;
@@ -31,14 +32,24 @@ public class LoginFormController {
     @FXML
     private PasswordField txtPassword;
 
+
     @FXML
     void btnLogin(ActionEvent event) {
+
         String email = txtEmail.getText().trim();
         String password = txtPassword.getText();
 
 
+        if (email.isEmpty() || password.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Error",
+                    "Please enter email and password");
+            return;
+        }
+
+
         if (!email.endsWith("@gmail.com")) {
-            showAlert("Error", "Email must end with @gmail.com");
+            showAlert(Alert.AlertType.ERROR, "Error",
+                    "Email must end with @gmail.com");
             return;
         }
 
@@ -46,47 +57,68 @@ public class LoginFormController {
 
 
         if (loginFormService.login(dto)) {
-            showAlert("Success", "Login Successful!");
+
+            showAlert(Alert.AlertType.INFORMATION,
+                    "Success", "Login Successful!");
 
             try {
+                URL url = getClass().getResource("/view/dashBoard_Form.fxml");
+                if (url == null) {
+                    showAlert(Alert.AlertType.ERROR,
+                            "Error", "Dashboard FXML not found");
+                    return;
+                }
+
                 Stage stage = (Stage) btnLogin.getScene().getWindow();
-                stage.setScene(new Scene(
-                        FXMLLoader.load(getClass().getResource("/view/dashBoard_Form.fxml"))
-                ));
+                stage.setScene(new Scene(FXMLLoader.load(url)));
                 stage.show();
+
             } catch (IOException e) {
                 e.printStackTrace();
-                showAlert("Error", "Dashboard load failed");
+                showAlert(Alert.AlertType.ERROR,
+                        "Error", "Dashboard load failed");
             }
 
         } else {
-            showAlert("Error", "Invalid email or password");
+            showAlert(Alert.AlertType.ERROR,
+                    "Error", "Invalid email or password");
         }
     }
 
-    // 🔁 GO TO SIGN UP
+
     @FXML
     void btnSingUpOnAction(ActionEvent event) {
         try {
+            URL url = getClass().getResource("/view/singUp_Form.fxml");
+            if (url == null) {
+                showAlert(Alert.AlertType.ERROR,
+                        "Error", "Sign Up FXML not found");
+                return;
+            }
+
             Stage stage = (Stage) btnSignUp.getScene().getWindow();
-            stage.setScene(new Scene(
-                    FXMLLoader.load(getClass().getResource("/view/singUp_Form.fxml"))
-            ));
+            stage.setScene(new Scene(FXMLLoader.load(url)));
             stage.show();
+
         } catch (IOException e) {
             e.printStackTrace();
-            showAlert("Error", "Sign Up page load failed");
+            showAlert(Alert.AlertType.ERROR,
+                    "Error", "Sign Up page load failed");
         }
     }
 
 
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    private void showAlert(Alert.AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
+
+
+        alert.getDialogPane().getStylesheets().add(
+                getClass().getResource("/css/alert.css").toExternalForm()
+        );
+
         alert.showAndWait();
     }
-
-
 }

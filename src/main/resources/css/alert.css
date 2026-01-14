@@ -1,0 +1,76 @@
+/* Base dialog */
+.dialog-pane {
+    -fx-background-radius: 15;
+    -fx-background-color: #fff;
+    -fx-border-radius: 15;
+    -fx-border-width: 2;
+}
+
+/* Error style */
+.dialog-pane:error {
+    -fx-background-color: #ffe6e6;
+    -fx-border-color: #fb6f92;
+}
+
+/* Success style */
+.dialog-pane:information {
+    -fx-background-color: #e6fff2;
+    -fx-border-color: #28a745;
+}
+
+/* Warning style */
+.dialog-pane:warning {
+    -fx-background-color: #fff9e6;
+    -fx-border-color: #ffbf00;
+}
+
+/* Header */
+.dialog-pane .header-panel {
+    -fx-background-radius: 15 15 0 0;
+    -fx-background-color: #fb6f92;
+}
+
+.dialog-pane:information .header-panel {
+    -fx-background-color: #28a745;
+}
+
+.dialog-pane:warning .header-panel {
+    -fx-background-color: #ffbf00;
+}
+
+.dialog-pane .header-panel .label {
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+/* Content */
+.dialog-pane .content.label {
+    -fx-text-fill: #333;
+    -fx-font-size: 14px;
+}
+
+/* Buttons */
+.dialog-pane .button {
+    -fx-background-radius: 12;
+    -fx-font-weight: bold;
+}
+
+.dialog-pane:error .button {
+    -fx-background-color: #fb6f92;
+    -fx-text-fill: white;
+}
+
+.dialog-pane:information .button {
+    -fx-background-color: #28a745;
+    -fx-text-fill: white;
+}
+
+.dialog-pane:warning .button {
+    -fx-background-color: #ffbf00;
+    -fx-text-fill: white;
+}
+
+.dialog-pane .button:hover {
+    -fx-opacity: 0.85;
+}
