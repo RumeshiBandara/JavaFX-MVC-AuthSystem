@@ -23,7 +23,7 @@
             <TextField fx:id="txtEmail" layoutX="50.0" layoutY="258.0" prefHeight="30.0" prefWidth="408.0" promptText="E mail" />
             <PasswordField fx:id="txtPassword" layoutX="53.0" layoutY="330.0" prefHeight="30.0" prefWidth="408.0" promptText="password" />
             <PasswordField fx:id="txtRePassword" layoutX="56.0" layoutY="408.0" prefHeight="30.0" prefWidth="408.0" promptText="confirm to the password" />
-            <Button fx:id="btnSingUp" layoutX="369.0" layoutY="466.0" mnemonicParsing="false" onAction="#btnSingIn" prefHeight="25.0" prefWidth="88.0" text="sing up">
+            <Button fx:id="btnSingUp" layoutX="369.0" layoutY="466.0" mnemonicParsing="false" onAction="#btnSingUpOnAction" prefHeight="25.0" prefWidth="88.0" text="sing up">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

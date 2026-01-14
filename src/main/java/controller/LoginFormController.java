@@ -31,13 +31,13 @@ public class LoginFormController {
     @FXML
     private PasswordField txtPassword;
 
-    // 🔐 LOGIN BUTTON ACTION
+
     @FXML
     void btnLogin(ActionEvent event) {
         String email = txtEmail.getText().trim();
         String password = txtPassword.getText();
 
-        // Email validation
+
         if (!email.endsWith("@gmail.com")) {
             showAlert("Error", "Email must end with @gmail.com");
             return;
@@ -45,7 +45,7 @@ public class LoginFormController {
 
         LoginDTO dto = new LoginDTO(email, password);
 
-        // Service layer handles BCrypt check
+
         if (loginFormService.login(dto)) {
             showAlert("Success", "Login Successful!");
 

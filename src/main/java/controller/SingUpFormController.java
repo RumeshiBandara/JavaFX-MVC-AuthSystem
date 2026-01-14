@@ -37,9 +37,8 @@ public class SingUpFormController {
     @FXML
     private PasswordField txtRePassword;
 
-    // 🔐 SIGN UP BUTTON
     @FXML
-    void btnSingIn(ActionEvent event) {
+    void btnSingUpOnAction(ActionEvent event){
 
         String firstName = txtFirstName.getText().trim();
         String lastName  = txtLastName.getText().trim();
@@ -89,11 +88,11 @@ public class SingUpFormController {
         if (singUpService.register(dto)) {
             showAlert("Success", "Registration successful!");
 
-            // Go back to Login
+
             try {
                 Stage stage = (Stage) btnSingUp.getScene().getWindow();
                 stage.setScene(new Scene(
-                        FXMLLoader.load(getClass().getResource("/view/login_Form.fxml"))
+                        FXMLLoader.load(getClass().getResource("/view/dashBoard_Form.fxml"))
                 ));
                 stage.show();
             } catch (IOException e) {
